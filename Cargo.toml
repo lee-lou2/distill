@@ -1,0 +1,45 @@
+[package]
+name = "distill"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "distill"
+path = "src/main.rs"
+
+[[bin]]
+name = "loadtest"
+path = "src/bin/loadtest.rs"
+
+[dependencies]
+# Web Framework
+axum = { version = "0.8", features = ["macros"] }
+tokio = { version = "1", features = ["full"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+
+# Browser Automation
+headless_chrome = "1.0"
+
+# HTTP Client for LLM
+reqwest = { version = "0.12", features = ["json"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# HTML to Markdown
+htmd = "0.1"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error Handling
+thiserror = "2"
+anyhow = "1"
+
+# Utilities
+uuid = { version = "1", features = ["v4"] }
+url = "2"
+subtle = "2"
