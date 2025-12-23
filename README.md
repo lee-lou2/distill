@@ -33,9 +33,9 @@ flowchart TB
     end
 
     subgraph BM["BrowserManager"]
-        C[Semaphore\nmax 50]
-        D[Idle Tab Pool\n1초 후 정리]
-        E[Auto-Restart\n연결 끊김 복구]
+        C[Semaphore<br>max 50]
+        D[Idle Tab Pool<br>1초 후 정리]
+        E[Auto-Restart<br>연결 끊김 복구]
     end
 
     subgraph Chrome["Headless Chrome"]
@@ -49,7 +49,7 @@ flowchart TB
         J[Structured Output]
     end
 
-    A -->|POST /scrape\nx-api-key| B
+    A -->|POST /scrape<br>x-api-key| B
     B -->|인증 성공| B2
     B -->|인증 실패| ERR[401 Unauthorized]
     B2 --> C
@@ -69,7 +69,7 @@ flowchart TB
 ```mermaid
 flowchart TD
     A([요청 수신]) --> AUTH{x-api-key 검증}
-    AUTH -->|유효| B[탭 획득\nacquire_tab]
+    AUTH -->|유효| B[탭 획득<br>acquire_tab]
     AUTH -->|무효| ERR0[/401 UNAUTHORIZED/]
 
     B --> B1{Idle Pool 확인}
@@ -78,9 +78,9 @@ flowchart TD
     B2 --> C
     B3 --> C
 
-    C[페이지 로드\nnavigate] -->|10초 타임아웃| D{성공?}
+    C[페이지 로드<br>navigate] -->|10초 타임아웃| D{성공?}
     D -->|No| ERR1[/408 TIMEOUT/]
-    D -->|Yes| E[데이터 추출\nJS evaluate]
+    D -->|Yes| E[데이터 추출<br>JS evaluate]
 
     E --> F[title, og_tags, body_html]
     F --> G{output_format}
@@ -94,7 +94,7 @@ flowchart TD
     J -->|No| M
     K -->|Yes| L[Gemini API 호출]
     K -->|No| ERR2[/503 GEMINI_KEY_NOT_CONFIGURED/]
-    L --> M[탭 반환\nrelease_tab]
+    L --> M[탭 반환<br>release_tab]
 
     M --> N[Idle Pool에 보관]
     N --> O{1초 후}
